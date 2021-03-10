@@ -48,7 +48,7 @@
 
     exports.push([module.i, "/* You can add global styles to this file, and also import other style files */", "", {
       "version": 3,
-      "sources": ["C:\\Users\\aiman junaid\\Desktop\\Software Eng\\sprint1/src\\styles.scss"],
+      "sources": ["C:\\Users\\aiman junaid\\Desktop\\Software Eng\\sprint1\\src\\app\\components/..\\..\\styles.scss"],
       "names": [],
       "mappings": "AAAA,8EAAA",
       "file": "styles.scss",
