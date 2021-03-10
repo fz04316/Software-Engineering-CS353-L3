@@ -1,3 +1,9 @@
+$desktop: 960px
+$tablet: 768px
+$mobile-large: 640px
+$mobile: 480px
+$mobile-small: 300px
+@media only screen and (max-width :  $desktop/$tablet/$mobile-large/$mobile/$mobile-small)
 (function($) {
 	"use strict"
 
