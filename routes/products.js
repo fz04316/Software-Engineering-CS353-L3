@@ -46,6 +46,8 @@ router.get('/', function (req, res) {       // Sending Page Query Parameter is m
       .catch(err => console.log(err));
 });
 
+
+
 /* GET ONE PRODUCT*/
 router.get('/:prodId', (req, res) => {
   let productId = req.params.prodId;
