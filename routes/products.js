@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
+const {database}=require('../config/helpers');
 
-const database = mysql.createConnection({
-    host: 'eu-cdbr-west-01.cleardb.com',
-    user: 'b364ea95162c4a',
-    password: '08a3b1c8',
-    database: 'heroku_e9dd0a4d616598e'
-});
-database.connect();
-/* GET ALL PRODUCTS */
 router.get('/', function (req, res) {
+    database.query('SELECT * FROM products', function (err, rows, fields) {
+        if (err) throw err;
+
+        console.log(rows[0]);
+    });
+});
+/* GET ALL PRODUCTS */
+/*router.get('/', function (req, res) {
   let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
   const limit = (req.query.limit !== undefined && req.query.limit !== 0) ? req.query.limit : 20;   // set limit of items per page
   let startValue;
@@ -79,7 +80,7 @@ router.put('/update', function (req, res) {
     });
 
 / * GET ONE PRODUCT*/
-router.get('/:prodId', (req, res) => {
+/*router.get('/:prodId', (req, res) => {
   let productId = req.params.prodId;
   database.table('products as p')
       .join([
@@ -109,5 +110,5 @@ router.get('/:prodId', (req, res) => {
       }).catch(err => res.json(err));
 });
 
-
+*/
 module.exports = router;

@@ -1,18 +1,16 @@
-const Mysqli = require('mysqli');
+const mysql = require('mysql');
 
-
-let conn = new Mysqli({
-    Host: 'localhost', // IP/domain name
-    port: 3306, // port, default 3306
-    user: 'root', // username
-    passwd: '', // password
-    db: 'mega_shop'
+const database = mysql.createConnection({
+    host: 'eu-cdbr-west-01.cleardb.com',
+    user: 'b364ea95162c4a',
+    password: '08a3b1c8',
+    database: 'heroku_e9dd0a4d616598e'
 });
+database.connect();
 
-let db = conn.emit(false, '');
 
 module.exports = {
-    database: db
+    database: database
 };
 
 
