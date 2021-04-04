@@ -1400,7 +1400,7 @@ class ProductService {
         this.http = http;
         this.url = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].SERVER_URL;
     }
-    getAllProducts(limitOfResults = 12) {
+    getAllProducts(limitOfResults = 14) {
         return this.http.get(this.url + 'products', {
             params: {
                 limit: limitOfResults.toString()
@@ -1409,9 +1409,6 @@ class ProductService {
     }
     getSingleProduct(id) {
         return this.http.get(this.url + 'products/' + id);
-    }
-    getProductsFromCategory(catName) {
-        return this.http.get(this.url + 'products/category/' + catName);
     }
 }
 ProductService.ɵfac = function ProductService_Factory(t) { return new (t || ProductService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };

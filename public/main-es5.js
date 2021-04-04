@@ -2672,7 +2672,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(ProductService, [{
         key: "getAllProducts",
         value: function getAllProducts() {
-          var limitOfResults = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 12;
+          var limitOfResults = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 14;
           return this.http.get(this.url + 'products', {
             params: {
               limit: limitOfResults.toString()
@@ -2683,11 +2683,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "getSingleProduct",
         value: function getSingleProduct(id) {
           return this.http.get(this.url + 'products/' + id);
-        }
-      }, {
-        key: "getProductsFromCategory",
-        value: function getProductsFromCategory(catName) {
-          return this.http.get(this.url + 'products/category/' + catName);
         }
       }]);
 
