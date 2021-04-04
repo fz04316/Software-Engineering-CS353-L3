@@ -1,16 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {database} = require('../config/helpers');
-const mysql = require('mysql');
 
-/*const connection = mysql.createConnection({
-    host: 'localhost',
-    database: 'mega_shop',
-    port: '3306',
-    user: 'root',
-    password: '',
-});
-connection.connect();*/
 /* GET ALL PRODUCTS */
 router.get('/', function (req, res) {
   let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
@@ -73,12 +64,24 @@ router.post('/add', async (req, res) => {
     message: `Product Added`});
 });
 
-/*router.put('/update', function (req, res) {
-        connection.query('UPDATE `products` SET `title`=?,`image`=?,`images`=?,`description`=?,`price`=?,`quantity`=?,`short_desc`=?,`cat_id`=? where `id`=?', [req.body.title,req.body.image, req.body.images,req.body.description,req.body.price,req.body.quantity,req.body.short_desc,req.body.cat_id, req.body.id], function (error, results, fields) {
-            if (error) throw error;
-            res.end(JSON.stringify(results));
-        });
-    });*/
+router.put('/update/:prodId', function (req, res) {
+    let productId = req.params.prodId;
+    let {title,image,images,description,price,quantity,category,cat_id} = req.body;
+    database.table('products')
+        .filter({id: productId})
+        .update({
+            title:title,
+            image:image,
+            images:images,
+            description:description,
+            price:price,
+            quantity:quantity,
+            short_desc:category,
+            cat_id:cat_id
+        }).catch(err => console.log(err));
+    res.json({
+        message: `Product Updated`});
+});
 
 / * GET ONE PRODUCT*/
 router.get('/:prodId', (req, res) => {
