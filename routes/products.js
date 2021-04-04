@@ -3,14 +3,14 @@ const router = express.Router();
 const {database} = require('../config/helpers');
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
+/*const connection = mysql.createConnection({
     host: 'localhost',
     database: 'mega_shop',
     port: '3306',
     user: 'root',
     password: '',
 });
-connection.connect();
+connection.connect();*/
 /* GET ALL PRODUCTS */
 router.get('/', function (req, res) {
   let page = (req.query.page !== undefined && req.query.page !== 0) ? req.query.page : 1;
@@ -73,12 +73,12 @@ router.post('/add', async (req, res) => {
     message: `Product Added`});
 });
 
-router.put('/update', function (req, res) {
+/*router.put('/update', function (req, res) {
         connection.query('UPDATE `products` SET `title`=?,`image`=?,`images`=?,`description`=?,`price`=?,`quantity`=?,`short_desc`=?,`cat_id`=? where `id`=?', [req.body.title,req.body.image, req.body.images,req.body.description,req.body.price,req.body.quantity,req.body.short_desc,req.body.cat_id, req.body.id], function (error, results, fields) {
             if (error) throw error;
             res.end(JSON.stringify(results));
         });
-    });
+    });*/
 
 / * GET ONE PRODUCT*/
 router.get('/:prodId', (req, res) => {
