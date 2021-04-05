@@ -8,7 +8,7 @@ let conn = new Mysqli({
     db: 'heroku_ab3d640412d39ad'
 });
 
-let db = conn.emit(false, '');
+let db = conn.connect();
 
 module.exports = {
     database: db
