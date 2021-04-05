@@ -2,11 +2,11 @@ const Mysqli = require('mysqli');
 
 
 let conn = new Mysqli({
-    Host: 'localhost', // IP/domain name
+    Host: 'eu-cdbr-west-01.cleardb.com', // IP/domain name
     port: 3306, // port, default 3306
-    user: 'root', // username
-    passwd: '', // password
-    db: 'mega_shop'
+    user: 'bbbf434d4e9277', // username
+    passwd: '578a4709', // password
+    db: 'heroku_ab3d640412d39ad'
 });
 
 let db = conn.emit(false, '');
