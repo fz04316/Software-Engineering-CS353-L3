@@ -15,7 +15,7 @@ con.connect(function(err) {
 //show all products
 const allproducts = (req, res) => {
     let sql = "SELECT * FROM products";
-    let query = database.query(sql, (err, results) => {
+    let query = con.query(sql, (err, results) => {
         if (err) throw err;
         res.send(results);
     });
@@ -35,7 +35,7 @@ const addproduct=(req, res) => {
         cat_id: req.body.cat_id
     };
     let sql = "INSERT INTO products SET ?";
-    let query = database.query(sql, data, (err, results) => {
+    let query = con.query(sql, data, (err, results) => {
         if (err) throw err;
         res.status(200).json({
             results
@@ -46,7 +46,7 @@ const addproduct=(req, res) => {
 //update product
 const updateproduct=(req, res) => {
     let sql = "UPDATE products SET title='" + req.body.title + "',image='" + req.body.image + "',images='" + req.body.images + "',description='" + req.body.description + "',price='" + req.body.price + "',quantity='" + req.body.quantity + "',short_desc='" + req.body.category + "',cat_id='" + req.body.cat_id + "' WHERE id=" + req.params.id;
-    let query = database.query(sql, (err, results) => {
+    let query = con.query(sql, (err, results) => {
         if (err) throw err;
         res.status(200).json({
             results
@@ -58,7 +58,7 @@ const updateproduct=(req, res) => {
 const deleteproduct=(req, res) =>
 {
     let sql = "DELETE FROM products WHERE id=" + req.params.id + "";
-    let query = database.query(sql, (err, results) => {
+    let query = con.query(sql, (err, results) => {
         if (err) throw err;
         res.status(200).json({
             results
@@ -70,7 +70,7 @@ const deleteproduct=(req, res) =>
 //show single product
 const singleproduct=(req, res) => {
     let sql = "SELECT * FROM products WHERE id=" + req.params.id;
-    let query = database.query(sql, (err, results) => {
+    let query = con.query(sql, (err, results) => {
         if (err) throw err;
         res.status(200).json({
             results
