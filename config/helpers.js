@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+/*const mysql = require('mysql');
 
 const con = mysql.createConnection({
     host: "eu-cdbr-west-01.cleardb.com",
@@ -9,5 +9,5 @@ const con = mysql.createConnection({
 
 module.exports = {
     database: con
-};
+};*/
 
