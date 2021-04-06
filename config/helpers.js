@@ -10,7 +10,3 @@ const con = mysql.createConnection({
 module.exports = {
     database: con
 };
-<<<<<<< HEAD
-=======
-
->>>>>>> 859ef3c3483362b0fac3b6aa3d71c88775f357f4
