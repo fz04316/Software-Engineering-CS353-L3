@@ -13,7 +13,7 @@ con.connect(function(err) {
     console.log("Connected!");
 });
 //show all products
-const allproducts = (req, res) => {
+const allproducts=(req, res) => {
     let sql = "SELECT * FROM products";
     let query = con.query(sql, (err, results) => {
         if (err) throw err;
@@ -22,7 +22,7 @@ const allproducts = (req, res) => {
 };
 
 //add new product
-const addproduct=(req, res) => {
+const addproduct=(req, res)=>{
     let data = {
         id: req.body.id,
         title: req.body.title,
@@ -66,7 +66,6 @@ const deleteproduct=(req, res) =>
     });
 };
 
-/ * GET ONE PRODUCT*/
 //show single product
 const singleproduct=(req, res) => {
     let sql = "SELECT * FROM products WHERE id=" + req.params.id;
@@ -76,4 +75,13 @@ const singleproduct=(req, res) => {
             results
         });
     });
+};
+
+module.exports = {
+    allproducts,
+    singleproduct,
+    updateproduct,
+    deleteproduct,
+    addproduct
+
 };
