@@ -6,6 +6,10 @@ index.use(express.static(__dirname + '/public'));
 index.use(express.static(distDir));
 const port = process.env.PORT || 3333;
 const {db} = require('../config/helpers');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+
 
 /* CORS */
 index.use(cors({
@@ -13,6 +17,16 @@ index.use(cors({
   methods: ['GET', 'PUT', 'DELETE', 'PATCH', 'POST'],
   allowedHeaders: 'Content-Type, Authorization, Origin, X-Requested-With, Accept'
 }));
+
+db.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+index.use(logger('dev'));
+index.use(express.json());
+index.use(express.urlencoded({ extended: false }));
+index.use(cookieParser());
+index.use(express.static(path.join(__dirname, 'public')));
 
 index.get('/api/products/',db.allproducts);
 index.get('/api/products/:id',db.singleproduct);
