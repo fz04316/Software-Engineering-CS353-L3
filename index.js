@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const router = express.Router();
 const index = express();
 const distDir = __dirname + "/dist/";
 index.use(express.static(__dirname + '/public'));
@@ -15,13 +14,13 @@ index.use(cors({
   allowedHeaders: 'Content-Type, Authorization, Origin, X-Requested-With, Accept'
 }));
 
-router.get('/api/products/',db.allproducts);
-router.get('/api/products/:id',db.singleproduct);
-router.post('/api/products/add',db.addproduct);
+index.get('/api/products/',db.allproducts);
+index.get('/api/products/:id',db.singleproduct);
+index.post('/api/products/add',db.addproduct);
 
 
-router.put('/api/products/update/:id',db.updateproduct);
-router.delete('/api/products/delete/:id',db.deleteproduct);
+index.put('/api/products/update/:id',db.updateproduct);
+index.delete('/api/products/delete/:id',db.deleteproduct);
 
 index.get('/',(request,response)=>{
   response.json({info:'Node.js,Express, and Postgres API'});
