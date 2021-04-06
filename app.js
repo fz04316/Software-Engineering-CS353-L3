@@ -18,10 +18,6 @@ app.use(cors({
   allowedHeaders: 'Content-Type, Authorization, Origin, X-Requested-With, Accept'
 }));
 
-db.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
