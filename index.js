@@ -22,9 +22,6 @@ index.post('/api/products/add',db.addproduct);
 index.put('/api/products/update/:id',db.updateproduct);
 index.delete('/api/products/delete/:id',db.deleteproduct);
 
-index.get('/',(request,response)=>{
-  response.json({info:'Node.js,Express, and Postgres API'});
-});
 index.listen(port,()=>{
   console.log(`App running on port ${port}.`);
 })
