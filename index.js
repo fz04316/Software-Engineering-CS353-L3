@@ -4,7 +4,7 @@ const index = express();
 const distDir = __dirname + "/dist/";
 index.use(express.static(__dirname + '/public'));
 index.use(express.static(distDir));
-const port = process.env.PORT || 3333;
+const port = process.env.PORT || 8080;
 const {db} = require('../config/helpers');
 const path = require('path');
 const cookieParser = require('cookie-parser');
