@@ -1,7 +1,4 @@
 const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
 const cors = require('cors');
 const router = express.Router();
 const index = express();
@@ -9,9 +6,7 @@ const distDir = __dirname + "/dist/";
 index.use(express.static(__dirname + '/public'));
 index.use(express.static(distDir));
 const port = process.env.PORT || 3333;
-
-
-const productsRoute = require('./routes/products');
+const {db} = require('../config/helpers');
 
 /* CORS */
 index.use(cors({
@@ -20,19 +15,36 @@ index.use(cors({
   allowedHeaders: 'Content-Type, Authorization, Origin, X-Requested-With, Accept'
 }));
 
-
-index.use(logger('dev'));
-index.use(express.json());
-index.use(express.urlencoded({ extended: false }));
-index.use(cookieParser());
-index.use(express.static(path.join(__dirname, 'public')));
-
-index.use('/api/products',productsRoute);
+router.get('/api/products/',db.allproducts);
+router.get('/api/products/:id',db.singleproduct);
+router.post('/api/products/add',db.addproduct);
 
 
-index.get('/',(request, response)=>{
+router.put('/api/products/update/:id',db.updateproduct);
+router.delete('/api/products/delete/:id',db.deleteproduct);
+
+index.get('/',(request,response)=>{
   response.json({info:'Node.js,Express, and Postgres API'});
 });
 index.listen(port,()=>{
   console.log(`App running on port ${port}.`);
 })
+
+
+
+
+// define a sendmail endpoint, which will send emails and response with the corresponding status
+// app.post("/sendmail", (req, res) => {
+//     console.log("request came");
+//     let user = req.body;
+//     sendMail(user, (err, info) => {
+//       if (err) {
+//         console.log(err);
+//         res.status(400);
+//         res.send({ error: "Failed to send email" });
+//       } else {
+//         console.log("Email has been sent");
+//         res.send(info);
+//       }
+//     });
+//   });
