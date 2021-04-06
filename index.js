@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const router = express.Router();
 const index = express();
 const distDir = __dirname + "/dist/";
 index.use(express.static(__dirname + '/public'));
@@ -28,7 +29,7 @@ index.use(express.static(path.join(__dirname, 'public')));
 
 index.use('/api/products',productsRoute);
 
-module.exports = index;
+
 index.get('/',(request, response)=>{
   response.json({info:'Node.js,Express, and Postgres API'});
 });
