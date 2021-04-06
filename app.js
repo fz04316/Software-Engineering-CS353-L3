@@ -5,7 +5,7 @@ const distDir = __dirname + "/dist/";
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(distDir));
 const port = process.env.PORT || 8080;
-const {db} = require('../config/helpers');
+const {db} = require('./config/helpers');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');

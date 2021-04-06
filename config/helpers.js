@@ -19,7 +19,7 @@ const allproducts = (req, res) => {
         if (err) throw err;
         res.send(results);
     });
-}
+};
 
 //add new product
 const addproduct=(req, res) => {
@@ -41,7 +41,7 @@ const addproduct=(req, res) => {
             results
         });
     });
-}
+};
 
 //update product
 const updateproduct=(req, res) => {
@@ -52,7 +52,7 @@ const updateproduct=(req, res) => {
             results
         });
     });
-}
+};
 
 //Delete product
 const deleteproduct=(req, res) =>
@@ -64,7 +64,7 @@ const deleteproduct=(req, res) =>
             results
         });
     });
-}
+};
 
 / * GET ONE PRODUCT*/
 //show single product
@@ -76,4 +76,4 @@ const singleproduct=(req, res) => {
             results
         });
     });
-}
+};
