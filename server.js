@@ -2,13 +2,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const distDir = __dirname + "/dist/";
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(distDir));
 
-
-// Serve only the static files form the dist directory
-app.use(express.static('./dist/backend'));
-
-app.get('/*', (req, res) =>
-  res.sendFile('index.html', {root: 'dist/backend/'}),
-);
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT);
+app.get('/',(request,response)=>{
+    response.json({info:'Node.js,Express, and Postgres API'});
+});
+app.listen(port,()=>{
+    console.log(`App running on port ${port}.`);
+})

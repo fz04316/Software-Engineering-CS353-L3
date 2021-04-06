@@ -3,6 +3,10 @@ const router = express.Router();
 const {database} = require('../config/helpers');
 
 
+database.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+});
 //show all products
 router.get('/',(req, res) => {
     let sql = "SELECT * FROM products";
