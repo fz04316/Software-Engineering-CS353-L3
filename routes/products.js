@@ -12,7 +12,7 @@ router.get('/',(req, res) => {
     let sql = "SELECT * FROM products";
     let query = database.query(sql, (err, results) => {
         if(err) throw err;
-        res.send(JSON.stringify({"response": results}));
+        res.send(results);
     });
 });
 
@@ -22,7 +22,9 @@ router.post('/add',(req, res) => {
     let sql = "INSERT INTO products SET ?";
     let query = database.query(sql, data,(err, results) => {
         if(err) throw err;
-        res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+        res.status(200).json({
+            results
+        });
     });
 });
 
@@ -31,7 +33,9 @@ router.put('/update/:id',(req, res) => {
     let sql = "UPDATE products SET title='"+req.body.title+"',image='"+req.body.image+"',images='"+req.body.images+"',description='"+req.body.description+"',price='"+req.body.price+"',quantity='"+req.body.quantity+"',short_desc='"+req.body.category+"',cat_id='"+req.body.cat_id+"' WHERE id="+req.params.id;
     let query = database.query(sql, (err, results) => {
         if(err) throw err;
-        res.send(JSON.stringify({"response": results}));
+        res.status(200).json({
+            results
+        });
     });
 });
 
@@ -40,7 +44,9 @@ router.delete('/delete/:id',(req, res) => {
     let sql = "DELETE FROM products WHERE id="+req.params.id+"";
     let query = database.query(sql, (err, results) => {
         if(err) throw err;
-        res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+        res.status(200).json({
+            results
+        });
     });
 });
 
@@ -50,7 +56,9 @@ router.get('/:id',(req, res) => {
     let sql = "SELECT * FROM products WHERE id="+req.params.id;
     let query = database.query(sql, (err, results) => {
         if(err) throw err;
-        res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+        res.status(200).json({
+            results
+        });
     });
 });
 
