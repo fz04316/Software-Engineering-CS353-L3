@@ -12,7 +12,7 @@ declare let $: any;
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements AfterViewInit, OnInit {
+export class ProductComponent implements OnInit {
   id: number;
   product;
   thumbimages: any[] = [];
