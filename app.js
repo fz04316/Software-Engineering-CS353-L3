@@ -6,8 +6,8 @@ const cors = require('cors');
 const app = express();
 
 
+
 const productsRoute = require('./routes/products');
-const usersRoute = require('./routes/orders');
 
 /* CORS */
 app.use(cors({
@@ -24,6 +24,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/products',productsRoute);
-app.use('/api/orders',usersRoute);
 
 module.exports = app;
