@@ -84,6 +84,9 @@ export class ProductComponent implements AfterViewInit, OnInit {
   addToCart(id: number) {
     this.cartService.AddProductToCart(id, this.quantityInput.nativeElement.value);
   }
+  BuyNow(id: number){
+    this.cartService.BuyNowCart(id, this.quantityInput.nativeElement.value);
+  }
 
   Increase() {
     // tslint:disable-next-line:radix
