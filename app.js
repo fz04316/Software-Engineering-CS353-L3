@@ -9,7 +9,7 @@ const port = process.env.PORT || 8080;
 
 
 const productsRoute = require('./routes/products');
-
+const usersRoute = require('./routes/orders');
 /* CORS */
 app.use(cors({
   origin: '*',
@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/products',productsRoute);
-
+app.use('/api/orders',usersRoute);
 app.listen(port,()=>{
   console.log(`App running on port ${port}.`);
 });
