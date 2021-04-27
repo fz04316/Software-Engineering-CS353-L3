@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {database} = require('../config/helpers');
+const crypto = require('crypto');
 
 // GET ALL ORDERS
 router.get('/', (req, res) => {
@@ -13,9 +14,13 @@ router.get('/', (req, res) => {
             {
                 table: 'products as p',
                 on: 'p.id = od.product_id'
+            },
+            {
+                table: 'users as u',
+                on: 'u.id = o.user_id'
             }
         ])
-        .withFields(['o.id', 'p.title', 'p.description', 'p.price'])
+        .withFields(['o.id', 'p.title', 'p.description', 'p.price', 'u.username'])
         .getAll()
         .then(orders => {
             if (orders.length > 0) {
