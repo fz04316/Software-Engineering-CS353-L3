@@ -7,6 +7,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./thankyou.component.scss']
 })
 export class ThankyouComponent implements OnInit {
+  todayNumber: number = Date.now();
+  todayDate : Date = new Date();
+  todayString : string = new Date().toDateString();
+  todayISOString : string = new Date().toISOString();
   products;
   message: string;
   orderId: number;

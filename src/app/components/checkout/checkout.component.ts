@@ -24,26 +24,37 @@ export class CheckoutComponent implements OnInit {
               private router: Router,
               private  spinner: NgxSpinnerService,
               private fb: FormBuilder) {
-    this.checkoutForm = this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
-
-    });
   }
 
   ngOnInit(): void {
+    this.checkoutForm = this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      Address: ['', [Validators.required]],
+      City: ['', [Validators.required]],
+      Country: ['', [Validators.required]],
+      radio : ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required,Validators.pattern("[+0-9 ]{13}")]],
+
+    });
+
     this.initConfig();
     this.cartService.cartDataObs$.subscribe(data => this.cartData = data);
     this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
   }
+  get f() { return this.checkoutForm.controls; }
+
   onCheckout() {
-
-      this.spinner.show();
-      this.cartService.CheckoutFromCart(1);
-
+    this.isSubmitted = true;
+    // stop here if form is invalid
+    if (this.checkoutForm.invalid) {
+      return;
+    }
+    this.spinner.show();
+    this.cartService.CheckoutFromCart(1);
   }
+
   private initConfig(): void {
     this.payPalConfig = {
       currency: 'EUR',
@@ -104,6 +115,7 @@ export class CheckoutComponent implements OnInit {
       }
     };
   }
+// convenience getter for easy access to form fields
 
 }
 

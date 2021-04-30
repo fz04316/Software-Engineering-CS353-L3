@@ -1,18 +1,20 @@
+<div class="section">
 <div class="container">
-  <div class="row">
+  <div class="row d-flex">
     <div class="col-md-12">
       <div class="jumbotron text-center">
-        <h1 class="display-3">Thank You!</h1>
-
+        <img src="./../../../assets/img/confirm.jpg" alt="" style="width:250px; height: 250px"><br>
+        <p>Your order has been placed!</p>
         <hr>
         <p>
 
-        <p>Order Id : <strong>{{orderId}}</strong></p>
+        <p>Order Number : <strong>{{orderId}}</strong></p>
+        <p>Order Date : <strong>{{todayDate | date:'short'}}</strong></p>
       </div>
-
-      <table class="table table-striped">
-        <thead>
-        <tr>
+      <div class="col my-4">
+      <table class="table">
+        <thead class="table-dark">
+        <tr class="text-center">
           <th>Image</th>
           <th>Title</th>
           <th>Price</th>
@@ -21,8 +23,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let p of products">
-          <td>
-            <img [src]="p.image" alt="{{p.title}}" class="img-thumbnail" width="100px">
+          <td class="d-flex align-items-center justify-content-around" >
+            <img [src]="p.image" alt="{{p.title}}" class="order-1" width="100px">
           </td>
           <td>{{p.title}}</td>
           <td>{{p.price | currency:'USD'}}</td>
@@ -32,13 +34,17 @@
         <tr class="border-0">
           <td style="border: none;"></td>
           <td></td>
-          <td>TOTAL</td>
-          <td>{{cartTotal | currency:'USD'}}</td>
+          <td><strong>TOTAL</strong></td>
+          <td><strong>{{cartTotal | currency:'USD'}}</strong></td>
 
         </tr>
         </tbody>
       </table>
+      </div>
+
     </div>
   </div>
+
+</div>
 </div>
 
