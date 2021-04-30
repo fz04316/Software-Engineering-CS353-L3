@@ -15,6 +15,8 @@ import { SafePipeModule } from 'safe-pipe';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ProductComponent } from './components/product/product.component';
+import { ThankyouComponent } from './components/thankyou/thankyou.component';
+import {NgxPayPalModule} from 'ngx-paypal';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { ProductComponent } from './components/product/product.component';
     HomeComponent,
     CartComponent,
     CheckoutComponent,
-    ProductComponent
+    ProductComponent,
+    ThankyouComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { ProductComponent } from './components/product/product.component';
     NgxSpinnerModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxPayPalModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

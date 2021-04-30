@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {NavigationExtras, Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {OrderService} from './order.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
@@ -36,6 +37,7 @@ export class CartService {
 
   constructor(private productService: ProductService,
               private httpClient: HttpClient,
+              private orderService: OrderService,
               private router: Router,
               private spinner: NgxSpinnerService,
               private toast: ToastrService) {
@@ -267,7 +269,51 @@ export class CartService {
   }
 
 
+  CheckoutFromCart(userId: number) {
 
+    this.httpClient.post(`${this.ServerURL}orders/payment`, null).subscribe((res: { success: boolean }) => {
+      console.clear();
+
+      if (res.success) {
+
+        this.httpClient.post(`${this.ServerURL}orders/new`, {
+          userId,
+          products: this.cartDataClient.prodData
+        }).subscribe((data: OrderConfirmationResponse) => {
+
+          this.orderService.getSingleOrder(data.order_id).then(prods => {
+            if (data.success) {
+              const navigationExtras: NavigationExtras = {
+                state: {
+                  message: data.message,
+                  products: prods,
+                  orderId: data.order_id,
+                  total: this.cartDataClient.total
+                }
+              };
+              this.spinner.hide();
+              this.router.navigate(['/thankyou'], navigationExtras).then(p => {
+                this.cartDataClient = {prodData: [{incart: 0, id: 0}], total: 0};
+                this.cartTotal$.next(0);
+                localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+              });
+              this.resetServerData();
+            }
+          });
+
+        });
+      } else {
+        this.spinner.hide();
+        this.router.navigateByUrl('/checkout').then();
+        this.toast.error(`Sorry, failed to book the order`, 'Order Status', {
+          timeOut: 1500,
+          progressBar: true,
+          progressAnimation: 'increasing',
+          positionClass: 'toast-top-right'
+        });
+      }
+    });
+  }
 
   private CalculateTotal() {
     let Total = 0;
@@ -281,9 +327,26 @@ export class CartService {
     this.cartDataServer.total = Total;
     this.cartTotal$.next(this.cartDataServer.total);
   }
-
+  private resetServerData() {
+    this.cartDataServer = {
+      data: [{
+        product: undefined,
+        numInCart: 0
+      }],
+      total: 0
+    };
+    this.cartDataObs$.next({...this.cartDataServer});
+  }
 
 }
 
-
+interface OrderConfirmationResponse {
+  order_id: number;
+  success: boolean;
+  message: string;
+  products: [{
+    id: string,
+    numInCart: string
+  }];
+}
 
