@@ -33,7 +33,6 @@ export class CheckoutComponent implements OnInit {
       Address: ['', [Validators.required]],
       City: ['', [Validators.required]],
       Country: ['', [Validators.required]],
-      radio : ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required,Validators.pattern("[+0-9 ]{13}")]],
 
