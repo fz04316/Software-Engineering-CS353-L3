@@ -74,8 +74,10 @@
 
             </div>
         </div>
+
         <!-- /Billing Details -->
       </div>
+
 
       <!-- Order Details -->
       <div class="col-md-6 order-details">
@@ -97,28 +99,6 @@
             <div>Shipping</div>
             <div><strong>FREE</strong></div>
           </div>
-          <div class="payment-method" >
-
-            <div class="input-radio">
-              <input type="radio" name="payment" id="payment-3">
-              <label for="payment-3">
-                <span></span>
-                Paypal System
-              </label>
-              <div class="caption">
-                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-              </div>
-            </div>
-            <div class="input-radio">
-
-              <input type="radio" name="payment" id="payment-1">
-              <label for="payment-1">
-                <span></span>
-                Cash On Delivery
-              </label>
-
-            </div>
-          </div>
           <div class="order-col dropdown-divider">
             <div><strong>TOTAL</strong></div>
             <div><strong class="order-total">{{cartTotal | currency:'USD'}}</strong></div>
@@ -127,7 +107,42 @@
         <div class="input-checkbox">
           <input type="checkbox" id="terms">
         </div>
-        <button type="submit" class="btn-outline-danger btn-sm my-2 btn-block" [disabled]="cartTotal <= 0" (click)="onCheckout()">Place order</button>
+        <div class="payment-method" >
+
+          <div class="input-radio">
+            <input type="radio" name="payment" id="payment-3">
+            <label for="payment-3">
+              <span></span>
+              Paypal System
+            </label>
+            <div class="caption">
+              <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+          </div>
+          <div class="input-radio">
+
+            <input type="radio" name="payment" id="payment-1">
+            <label for="payment-1">
+              <span></span>
+              Cash On Delivery
+            </label>
+
+          </div>
+          <div class="input-radio">
+
+            <input type="radio" name="payment" id="payment-2">
+            <label for="payment-2">
+              <span></span>
+              Stripe
+            </label>
+            <div class="caption">
+              <button  class="btn btn-primary btn-block" type="button" (click)="pay(cartTotal)">Pay {{cartTotal | currency:'USD'}}</button>
+             </div>
+
+          </div>
+
+        </div>
+        <button type="submit" class="btn-outline-danger btn-sm my-2 btn-block"  [disabled]="cartTotal <= 0" (click)="onCheckout()">Place order</button>
       </div>
       <!-- /Order Details -->
     </div>

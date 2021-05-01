@@ -2098,6 +2098,11 @@ textarea.input {
 @media only screen and (max-width: 1201px) {}
 
 @media only screen and (max-width: 991px) {
+
+  .shop-body .head3 , .cta-btn{
+    text-align: left;
+    font-size: medium;
+  }
   #top-header .header-links.pull-left {
     float: none !important;
   }

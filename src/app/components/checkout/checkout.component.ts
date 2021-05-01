@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ICreateOrderRequest, IPayPalConfig} from 'ngx-paypal';
+import { loadStripe } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-checkout',
@@ -17,6 +18,7 @@ export class CheckoutComponent implements OnInit {
   cartData: CartModelServer;
   cartTotal: number;
   showSpinner: boolean;
+  strikeCheckout:any = null;
   checkoutForm: FormGroup;
   isSubmitted  =  false;
   constructor(private cartService: CartService,
@@ -27,6 +29,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.stripePaymentGateway();
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
@@ -44,6 +47,22 @@ export class CheckoutComponent implements OnInit {
   }
   get f() { return this.checkoutForm.controls; }
 
+  pay(amount) {
+    const strikeCheckout = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51Im7cuEy802oXDM2s16FXUmRyAaIXt30Gu2AdIue8bRRtkUMtnFHiHORVgb08FptA03qFJI6pHqcNzziBCrj5OJl005k7omowz',
+      locale: 'auto',
+      token: function (stripeToken: any) {
+        console.log(stripeToken)
+        alert('Stripe token generated!');
+      }
+    });
+
+    strikeCheckout.open({
+      name: 'RemoteStack',
+      description: 'Payment widgets',
+      amount: amount * 100
+    });
+  }
   onCheckout() {
     this.isSubmitted = true;
     // stop here if form is invalid
@@ -86,11 +105,11 @@ export class CheckoutComponent implements OnInit {
         commit: 'true'
       },
       style: {
-        label: 'paypal',
-        layout: 'vertical',
+        label: 'checkout',
+        layout: 'horizontal',
         size: 'small',
-        color: 'blue',
-        shape: 'rect'
+        color: 'gold',
+        shape: 'rect',
       },
       onApprove: (data, actions) => {
         console.log('onApprove - transaction was approved, but not authorized', data, actions);
@@ -114,7 +133,28 @@ export class CheckoutComponent implements OnInit {
       }
     };
   }
-// convenience getter for easy access to form fields
+
+  stripePaymentGateway() {
+    if(!window.document.getElementById('stripe-script')) {
+      const scr = window.document.createElement("script");
+      scr.id = "stripe-script";
+      scr.type = "text/javascript";
+      scr.src = "https://checkout.stripe.com/checkout.js";
+
+      scr.onload = () => {
+        this.strikeCheckout = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51Im7cuEy802oXDM2s16FXUmRyAaIXt30Gu2AdIue8bRRtkUMtnFHiHORVgb08FptA03qFJI6pHqcNzziBCrj5OJl005k7omowz',
+          locale: 'auto',
+          token: function (token: any) {
+            console.log(token)
+            alert('Payment via stripe successfull!');
+          }
+        });
+      }
+
+      window.document.body.appendChild(scr);
+    }
+  }
 
 }
 
