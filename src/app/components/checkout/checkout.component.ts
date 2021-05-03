@@ -93,12 +93,12 @@ export class CheckoutComponent implements OnInit {
     );
   //   Email.send({
   //     Host : "smtp.elasticemail.com",
-  //     Username : 'amo.junaid1@gmail.com',
+  //     Username : 'fatimazehra000@gmail.com',
   //     Password : "A42D2A612638C4C98A023CBE4290E5C73725",
-  //     To : "amo.junaid1@gmail.com",
-  //     From : "amo.junaid1@gmail.com",
+  //     To : "fatimazehra000@gmail.com",
+  //     From : "fatimazehra000@gmail.com",
   //     Subject :" hello",
-  //     Body : `<i>This is sent as a feedback from my resume page.</i> <br/> <b>Name: </b>${"123"} <br /> <b>Email: </b>${"amo.junaid1@gmail.com"}<br /> <b>Subject: </b>${"life is shit"}<br /> <b>Message:</b> <br /> ${"hey"} <br><br> <b>~End of Message.~</b> `
+  //     Body : `<i>This is sent as a feedback from my resume page.</i> <br/> <b>Name: </b>${"123"} <br /> <b>Email: </b>${"fatimazehra000@gmail.com"}<br /> <b>Subject: </b>${"life is shit"}<br /> <b>Message:</b> <br /> ${"hey"} <br><br> <b>~End of Message.~</b> `
   // }).then( message => {alert(message);  } );
 
 
