@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const {database} = require('../config/helpers');
 const crypto = require('crypto');
-
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 // GET ALL ORDERS
+
 router.get('/', (req, res) => {
     database.table('orders_details as od')
         .join([
@@ -142,10 +144,39 @@ router.post('/payment', (req, res) => {
         res.status(200).json({success: true});
     }, 3000)
 });
+router.post("/sendmail", (req, res) => {
+    console.log("request came");
+    let user = req.body;
+    sendMail(user, info => {
+        console.log(`The mail has been send 😃 and the id is ${info.messageId}`);
+        res.send(info);
+    });
+});
 
+async function sendMail(user, callback) {
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: "amo.junaid1@gmail.com",
+        }
+    });
 
+    let mailOptions = {
+        from: '"3DTraces" <foo@example.com>', // sender address
+        to: "amo.junaid1@gmail.com", // list of receivers
+        subject: "Wellcome to Fun Of Heuristic 👻", // Subject line
+        html: `<h1>Hi ${user.name}</h1><br>
+    <h4>Thanks for joining us</h4>`
+    };
 
+    // send mail with defined transport object
+    let info = await transporter.sendMail(mailOptions);
 
+    callback(info);
+}
 
 
 module.exports = router;

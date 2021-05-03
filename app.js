@@ -6,15 +6,15 @@ const cors = require('cors');
 const app = express();
 
 
-
 const productsRoute = require('./routes/products');
-
+const usersRoute = require('./routes/orders');
 /* CORS */
 app.use(cors({
   origin: '*',
   methods: ['GET', 'PUT', 'DELETE', 'PATCH', 'POST'],
   allowedHeaders: 'Content-Type, Authorization, Origin, X-Requested-With, Accept'
 }));
+
 
 
 app.use(logger('dev'));
@@ -24,5 +24,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/products',productsRoute);
+app.use('/api/orders',usersRoute);
 
 module.exports = app;
