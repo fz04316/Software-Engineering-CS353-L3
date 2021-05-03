@@ -27,6 +27,7 @@
     "sequelize": "^6.6.2",
     "swagger-jsdoc": "^6.0.0-rc.5",
     "swagger-ui-express": "^4.1.5",
-    "mysql": "latest"
+    "mysql": "latest",
+    "nodemailer": "latest"
   }
 }
