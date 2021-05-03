@@ -20,6 +20,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/products',productsRoute);
 app.use('/api/orders',usersRoute);
+var elasticemail = require('elasticemail');
+var client = elasticemail.createClient({
+  username: 'amo.junaid1@gmail.com',
+  apiKey: 'A42D2A612638C4C98A023CBE4290E5C73725'
+});
+ 
+var msg = {
+  from: 'julian@exmaple.org',
+  from_name: 'Julian Duque',
+  to: 'amo.junaid1@gmail.com',
+  subject: 'Hello',
+  body_text: 'Hello World!'
+};
+ 
+client.mailer.send(msg, function(err, result) {
+  if (err) {
+    return console.error(err);
+  }
+ 
+  console.log(result);
+});
 app.listen(port,()=>{
   console.log(`App running on port ${port}.`);
 });
