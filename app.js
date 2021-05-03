@@ -7,16 +7,10 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 
-
+app.use(cors({ origin: "*" }));
 const productsRoute = require('./routes/products');
 const usersRoute = require('./routes/orders');
 /* CORS */
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'PUT', 'DELETE', 'PATCH', 'POST'],
-  allowedHeaders: 'Content-Type, Authorization, Origin, X-Requested-With, Accept'
-}));
-
 
 app.use(logger('dev'));
 app.use(express.json());
