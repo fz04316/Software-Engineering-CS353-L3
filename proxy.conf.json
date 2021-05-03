@@ -1,6 +1,0 @@
-{
-  "/api": {
-    "target": "http://se-3dtraces.herokuapp.com",
-    "secure": false
-  }
-}
