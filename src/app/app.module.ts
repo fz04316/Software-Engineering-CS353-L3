@@ -17,6 +17,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ProductComponent } from './components/product/product.component';
 import { ThankyouComponent } from './components/thankyou/thankyou.component';
 import {NgxPayPalModule} from 'ngx-paypal';
+import { MessageService } from './services/message.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import {NgxPayPalModule} from 'ngx-paypal';
     NgxPayPalModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
